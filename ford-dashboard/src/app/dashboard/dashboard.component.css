@@ -1,0 +1,142 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f4f6fb;
+}
+
+/* Navbar (igual ao home) */
+.navbar-ford {
+  background-color: #003399;
+  padding: 8px 0;
+}
+
+.navbar-ford .navbar-brand img {
+  filter: brightness(0) invert(1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: #a8c4ff;
+}
+
+.logout-btn {
+  color: #ffcccc !important;
+}
+
+.logout-btn:hover {
+  color: #ff6666 !important;
+}
+
+.navbar-toggler {
+  color: white;
+  border: 1px solid white;
+  background: transparent;
+  padding: 4px 8px;
+  font-size: 1.2rem;
+}
+
+/* Título */
+.dashboard-title {
+  color: #003399;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.text-ford-blue {
+  color: #003399;
+}
+
+/* Cards de stat */
+.stat-card {
+  border-top: 3px solid #003399;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+
+/* Lista de modelos */
+.model-item {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: default;
+  color: #333;
+}
+
+.active-model {
+  background-color: #003399;
+  color: white !important;
+  font-weight: 600;
+}
+
+/* Imagem veículo */
+.vehicle-img-card {
+  background: linear-gradient(135deg, #e8ecf8, #ffffff);
+  min-height: 200px;
+}
+
+.vehicle-main-img {
+  max-height: 220px;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+/* Input VIN */
+.vin-input {
+  max-width: 500px;
+  font-family: monospace;
+  letter-spacing: 1px;
+}
+
+/* Tabela */
+.table-ford thead {
+  background-color: #003399;
+  color: white;
+}
+
+.table-ford th {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #003399;
+    padding: 1rem;
+    width: 180px;
+    z-index: 999;
+    border-radius: 0 0 0 8px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,73 @@
+<div class="login-container">
+  <!-- Lado esquerdo: imagem do carro -->
+  <div class="login-left">
+    <img src="http://localhost:3001/img/ranger.png" alt="Ford Ranger" class="car-image" />
+  </div>
+
+  <!-- Lado direito: formulário -->
+  <div class="login-right">
+    <div class="login-card">
+      <!-- Logo Ford -->
+      <div class="text-center mb-4">
+        <img src="http://localhost:3001/img/ford.png" alt="Ford Logo" class="ford-logo" />
+      </div>
+
+      <h4 class="text-center boas-vindas mb-4">Boas-vindas</h4>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Campo usuário -->
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i class="bi bi-person">👤</i></span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Insira seu usuário"
+            formControlName="nome"
+          />
+        </div>
+
+        <!-- Campo senha -->
+        <div class="mb-3 input-group">
+          <span class="input-group-text"><i>🔒</i></span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            placeholder="Insira sua senha"
+            formControlName="senha"
+          />
+          <button type="button" class="btn btn-outline-secondary" (click)="togglePassword()">
+            {{ showPassword ? '👁‍🗨' : '👁' }}
+          </button>
+        </div>
+
+
+    <!-- Logar automaticamente -->
+<div class="d-flex align-items-center justify-content-between mb-3 px-1">
+          <span class="toggle-label">Logar automaticamente</span>
+          <div class="form-check form-switch mb-0">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="loginAutomatico"
+              [ngModelOptions]="{standalone: true}"
+            />
+          </div>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div *ngIf="errorMsg" class="alert alert-danger py-1 mb-3" role="alert">
+          {{ errorMsg }}
+        </div>
+
+        <!-- Botão entrar -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-ford" [disabled]="loginForm.invalid">
+            Entrar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

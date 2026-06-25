@@ -1,0 +1,39 @@
+<div class="home-wrapper">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-ford">
+    <div class="d-flex align-items-center px-3 py-2">
+      <!-- Ícone hamburguer -->
+      <button class="hamburger-btn me-3" (click)="toggleMenu()">☰</button>
+      <!-- Logo Ford -->
+      <a routerLink="/home">
+        <img src="http://localhost:3001/img/ford.png" alt="Ford" height="40" />
+      </a>
+    </div>
+
+    <!-- Menu lateral dropdown -->
+    <div class="side-menu" [class.open]="menuAberto">
+      <a routerLink="/home" routerLinkActive="active" class="menu-item" (click)="menuAberto=false">Home</a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="menu-item" (click)="menuAberto=false">Dashboard</a>
+      <a class="menu-item sair" (click)="logout()" style="cursor:pointer">Sair</a>
+    </div>
+  </nav>
+
+  <!-- Conteúdo com fundo -->
+  <div class="home-content">
+    <div class="bg-overlay"></div>
+
+    <!-- Card de boas-vindas -->
+    <div class="welcome-card">
+      <div class="card shadow h-100" style="background-color: rgba(255,255,255,0.6); display: flex; flex-direction: column; align-items: center;">
+  
+  <div class="card-body p-5 pt-5" style="min-height: 400px;">
+    <h5 class="card-title ford-title">Sistema de dados FORD</h5>
+    <p class="card-text text-ford">Seja bem-vindo(a)!</p>
+    <a routerLink="/dashboard" class="btn btn-ford mt-2">Dashboard</a>
+  </div>
+  
+</div>
+      </div>
+    </div>
+  </div>
