@@ -1,0 +1,123 @@
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar-ford {
+  background-color: white;
+  padding: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #333;
+  cursor: pointer;
+  padding: 0;
+}
+
+.side-menu {
+  display: none;
+  flex-direction: column;
+  padding: 4px 12px 8px 12px;
+}
+
+.side-menu.open {
+  display: flex;
+}
+
+.menu-item {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 3px 0;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  color: #003399;
+  font-weight: 600;
+}
+
+.sair {
+  color: #333;
+}
+
+.home-content {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('http://localhost:3001/img/ranger.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.5);
+  z-index: 0;
+}
+
+.welcome-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  width: 600px;
+  padding: 1rem;
+  margin: auto;
+}
+
+.ford-title {
+  color: #003399;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.text-ford {
+  color: #003399;
+  font-size: 1.2rem;
+}
+
+.btn-ford {
+  background-color: #003399;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  padding: 6px 16px;
+}
+
+.btn-ford:hover {
+  background-color: #002277;
+  color: white;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #003399;
+    padding: 1rem;
+    width: 180px;
+    z-index: 999;
+    border-radius: 0 0 0 8px;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+}
