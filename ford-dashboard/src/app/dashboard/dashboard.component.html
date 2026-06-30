@@ -1,0 +1,162 @@
+<div class="dashboard-wrapper">
+
+<nav class="navbar navbar-ford">
+    <div class="d-flex align-items-center justify-content-between w-100 px-3 py-2">
+      <div class="d-flex align-items-center">
+        <button class="hamburger-btn me-3" (click)="toggleMenu()">☰</button>
+        <a routerLink="/home">
+          <img src="http://localhost:3001/img/ford.png" alt="Ford" height="40" />
+        </a>
+      </div>
+      <div class="user-menu">
+        <button class="user-btn" (click)="userMenuAberto = !userMenuAberto">👤</button>
+        <div class="user-dropdown" [class.open]="userMenuAberto">
+          <a (click)="logout()" style="cursor:pointer">Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="side-menu" [class.open]="menuAberto">
+      <a routerLink="/home" routerLinkActive="active" class="menu-item" (click)="menuAberto=false">Home</a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="menu-item" (click)="menuAberto=false">Dashboard</a>
+      <a class="menu-item sair" (click)="logout()" style="cursor:pointer">Sair</a>
+    </div>
+  </nav>
+
+  <div class="dashboard-body container-fluid px-4 py-3">
+
+    <h4 class="dashboard-title mb-3">Dashboard FORD</h4>
+
+    <div class="row g-3 mb-3 align-items-stretch">
+
+      <div class="col-12 col-md-3">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h6 class="card-subtitle text-muted mb-2">Veículo</h6>
+            <select class="form-select" (change)="onVehicleChange($event)">
+              <option *ngFor="let v of vehicles" [value]="v.id">{{ v.vehicle }}</option>
+            </select>
+           
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <div class="card h-100 shadow-sm stat-card">
+          <div class="card-body text-center">
+            <h6 class="card-subtitle text-muted mb-2">Total de Vendas</h6>
+            <p class="stat-number text-ford-blue">
+              {{ vehicleSelecionado?.volumetotal | number }}
+            </p>
+            <small class="text-muted">Und.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <div class="card h-100 shadow-sm stat-card">
+          <div class="card-body text-center">
+            <h6 class="card-subtitle text-muted mb-2">Conectados</h6>
+            <p class="stat-number text-ford-blue">
+              {{ vehicleSelecionado?.connected | number }}
+            </p>
+            <small class="text-muted">Und.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3">
+        <div class="card h-100 shadow-sm stat-card">
+          <div class="card-body text-center">
+            <h6 class="card-subtitle text-muted mb-2">Update Software</h6>
+            <p class="stat-number text-ford-blue">
+              {{ vehicleSelecionado?.softwareUpdates | number }}
+            </p>
+            <small class="text-muted">Und.</small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-12 col-md-10 mx-auto">
+        <div class="card shadow-sm vehicle-img-card">
+          <div class="card-body text-center py-4 d-flex justify-content-center align-items-center">
+            <img
+              *ngIf="vehicleSelecionado"
+              [src]="vehicleSelecionado.img"
+              [alt]="vehicleSelecionado.vehicle"
+              class="vehicle-main-img"
+            />
+            <p *ngIf="!vehicleSelecionado" class="text-muted">Selecione um veículo</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12">
+        <div class="card shadow-sm">
+          <div class="card-body">
+
+            <div class="mb-3 d-flex align-items-center gap-2 flex-wrap">
+              <input
+                type="text"
+                class="form-control vin-input"
+                placeholder="Digite o código VIN (ex: 2FRHDUYS2Y63NHD22454)"
+                [(ngModel)]="vinInput"
+                (ngModelChange)="onVinInput($event)"
+              />
+              <span *ngIf="vinCarregando" class="text-muted small">Buscando...</span>
+            </div>
+
+            <div *ngIf="vinErro" class="alert alert-warning py-1 mb-2">
+              {{ vinErro }}
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-sm">
+                <thead> 
+                  <tr style="background-color: #003399; color: white;">
+                    <th style="color: white; background-color: #003399;">Código - Vin</th>
+                    <th style="color: white; background-color: #003399;">Odômetro</th>
+                    <th style="color: white; background-color: #003399;">Nível de Combustível</th>
+                    <th style="color: white; background-color: #003399;">Status</th>
+                    <th style="color: white; background-color: #003399;">Lat</th>
+                    <th style="color: white; background-color: #003399;">Long.</th>
+                  </tr>
+                  </thead>
+                <tbody>
+                  <tr *ngIf="vehicleData">
+                    <td>{{ vinInput.toUpperCase() }}</td>
+                    <td>{{ vehicleData.odometro | number }} km</td>
+                    <td>{{ vehicleData.nivelCombustivel }} %</td>
+                    <td>
+                      <span
+                        class="badge"
+                        [class.bg-success]="vehicleData.status === 'on'"
+                        [class.bg-danger]="vehicleData.status === 'off'"
+                      >
+                        {{ vehicleData.status }}
+                      </span>
+                    </td>
+                    <td>{{ vehicleData.lat }}</td>
+                    <td>{{ vehicleData.long }}</td>
+                  </tr>
+                  <tr *ngIf="!vehicleData && !vinCarregando">
+                    <td colspan="6" class="text-center text-muted py-3">
+                      Digite um código VIN para buscar os dados do veículo.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

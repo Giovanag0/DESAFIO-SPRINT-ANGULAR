@@ -1,0 +1,68 @@
+<div class="login-container">
+  <!-- Lado esquerdo: imagem do carro -->
+  <div class="login-left">
+    <img src="http://localhost:3001/img/ranger.png" alt="Ford Ranger" class="car-image" />
+  </div>
+
+  <div class="login-right">
+    <div class="login-card">
+
+      <div class="text-center mb-4">
+        <img src="http://localhost:3001/img/ford.png" alt="Ford Logo" class="ford-logo" />
+      </div>
+
+      <h4 class="text-center boas-vindas mb-4">Boas-vindas</h4>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+       <div class="mb-3 input-group">
+          <span class="input-group-text bg-white">👤</span>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Insira seu e-mail"
+            formControlName="nome"
+          />
+          <span class="input-group-text bg-white info-icon" title="Insira o usuário cadastrado">ⓘ</span>
+        </div>
+
+       <div class="mb-3 input-group">
+          <span class="input-group-text"><i>🔒</i></span>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            class="form-control"
+            placeholder="Insira sua senha"
+            formControlName="senha"
+          />
+          <span class="input-group-text bg-white info-icon" style="cursor:pointer" (click)="togglePassword()">
+            <span *ngIf="!showPassword">👁</span>
+            <span *ngIf="showPassword">🚫</span>
+          </span>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mb-3 px-1">
+          <span class="toggle-label">Logar automaticamente <span class="info-icon" title="Mantém você conectado">ⓘ</span></span>
+          <div class="form-check form-switch mb-0">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [(ngModel)]="loginAutomatico"
+              [ngModelOptions]="{standalone: true}"
+            />
+          </div>
+        </div>
+
+        <div *ngIf="errorMsg" class="alert alert-danger py-1 mb-3" role="alert">
+          {{ errorMsg }}
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-ford" [disabled]="loginForm.invalid">
+            Entrar
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
